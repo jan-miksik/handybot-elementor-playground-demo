@@ -1,0 +1,249 @@
+/*
+Theme Name: HandyBot Demo Child
+Theme URI: https://handybot.cz/
+Description: A code-managed design layer around editable Elementor content.
+Author: Codex demo
+Template: hello-elementor
+Version: 0.5.6
+Text Domain: handybot-demo
+*/
+
+:root {
+  --hb-ink: #172027;
+  --hb-muted: #65717a;
+  --hb-cream: #f5f2eb;
+  --hb-accent: #ffcb05;
+  --hb-accent-ink: #6d5200;
+  --hb-accent-soft: #fff8d6;
+  --hb-green: #1c6b54;
+  --hb-violet: #4f578d;
+  --hb-violet-soft: #e7e8f2;
+  --hb-green-soft: #e6efe8;
+  --hb-line: #dfe2df;
+  --hb-content: 1180px;
+  /* Matches the flat background baked into the hero illustration. */
+  --hb-hero-tint: #fdfaf1;
+}
+
+html { scroll-behavior: smooth; }
+body { color: var(--hb-ink); background: #fff; font-family: Arial, Helvetica, sans-serif; }
+a { color: inherit; }
+
+.hb-site-header {
+  min-height: 80px;
+  padding: 0 max(24px, calc((100vw - var(--hb-content)) / 2));
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  border-bottom: 1px solid #e9e9e7;
+  background: rgba(255,255,255,.96);
+  position: relative;
+  z-index: 50;
+}
+.hb-brand { display: inline-flex; align-items: center; text-decoration: none; white-space: nowrap; }
+.hb-brand img { display: block; width: 174px; height: auto; }
+.hb-site-nav { display: flex; justify-content: center; gap: 36px; flex: 1; }
+.hb-site-nav a { color: var(--hb-ink); font-size: 14px; font-weight: 600; text-decoration: none; }
+.hb-site-nav a:hover { color: var(--hb-accent-ink); }
+.hb-header-cta { padding: 10px 0; border-bottom: 1px solid var(--hb-ink); color: var(--hb-ink); font-size: 13px; font-weight: 700; text-decoration: none; }
+.hb-header-cta span { color: var(--hb-accent); margin-left: 8px; }
+.hb-menu-button { display: none; border: 0; background: none; color: var(--hb-ink); font-size: 24px; cursor: pointer; }
+
+body .elementor .hb-eyebrow .elementor-heading-title { color: var(--hb-accent-ink); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+body .elementor .hb-hero-title .elementor-heading-title { color: var(--hb-ink); font-size: clamp(54px, 6vw, 84px); font-weight: 800; line-height: .98; letter-spacing: -.065em; }
+body .elementor .hb-display-title .elementor-heading-title { color: var(--hb-ink); font-size: clamp(42px, 4.8vw, 66px); font-weight: 800; line-height: 1.02; letter-spacing: -.055em; }
+body .elementor .hb-lead { color: var(--hb-muted); font-size: 18px; line-height: 1.65; }
+body .elementor .hb-button .elementor-button { min-height: 52px; padding: 17px 24px; background: var(--hb-accent); border-radius: 2px; color: var(--hb-ink); font-size: 14px; font-weight: 800; }
+body .elementor .hb-button .elementor-button:hover { transform: translateY(-2px); box-shadow: 0 9px 25px #1a1a1a25; }
+
+/*
+ * Elementor wraps the children of a boxed container in an extra .e-con-inner
+ * element. Layout that has to reach the children must therefore be applied to
+ * that inner element, otherwise the inner element alone becomes the single grid
+ * item and collapses to one column width. A container that an editor switched
+ * to full width has no inner element, so both shapes are covered.
+ */
+.hb-client-logos:has(> .e-con-inner), .hb-video-notes:has(> .e-con-inner) { display: block !important; }
+.hb-client-logos > .e-con-inner, .hb-client-logos.e-con-full,
+.hb-video-notes > .e-con-inner, .hb-video-notes.e-con-full { display: grid !important; width: 100%; max-width: 100%; }
+
+.hb-hero { min-height: 640px; background: #fff; align-items: stretch; }
+.hb-hero-copy { padding: 84px 5vw 84px max(24px, calc((100vw - var(--hb-content)) / 2)); }
+.hb-hero-explainer { max-width: 560px; margin-top: 24px; }
+body .elementor .hb-hero-explainer { font-size: 20px; }
+.hb-hero-copy > .e-con-inner, .hb-hero-visual > .e-con-inner { height: 100%; }
+/*
+ * The illustration keeps its own flat background, so the visual column uses the
+ * very same tint and the image bleeds to the viewport edge. No frame, no
+ * shadow: the artwork sits in the page instead of floating above it.
+ */
+.hb-hero-visual { padding: 0; background: var(--hb-hero-tint); overflow: hidden; }
+.hb-hero-visual > .e-con-inner { justify-content: center; padding: 0; }
+.hb-hero-image { width: 100%; }
+.hb-hero-image img { width: 100%; height: auto; display: block; border-radius: 0; box-shadow: none; }
+/*
+ * On desktop the artwork fills the whole column instead of floating in a band
+ * of empty tint, so the robot carries as much weight as the headline. The crop
+ * is off-centre to keep the robot and the interface it points at.
+ */
+@media (min-width: 901px) {
+  .hb-hero-image, .hb-hero-image .elementor-widget-container, .hb-hero-image figure, .hb-hero-image a { height: 100%; }
+  .hb-hero-image img { height: 100%; object-fit: cover; object-position: 62% 50%; }
+}
+
+.hb-section { padding: 115px max(24px, calc((100vw - var(--hb-content)) / 2)); }
+.hb-clients { background: #fbfaf7; border-top: 1px solid var(--hb-line); border-bottom: 1px solid var(--hb-line); }
+.hb-clients-title { max-width: 800px; }
+.hb-clients-lead { max-width: 720px; }
+.hb-client-logos { margin: 38px 0 48px; }
+.hb-client-logos > .e-con-inner, .hb-client-logos.e-con-full { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.hb-client-logo { width: auto !important; height: 100%; min-height: 104px; padding: 20px 22px; background: #fff; border: 1px solid var(--hb-line); transition: border-color .2s, transform .2s; }
+.hb-client-logo, .hb-client-logo > .e-con-inner { display: flex !important; align-items: center; justify-content: center; width: 100%; max-width: 100%; }
+.hb-client-logo > .e-con-inner { height: 100%; padding: 0; }
+.hb-client-logo:hover { border-color: var(--hb-accent); transform: translateY(-3px); }
+.hb-client-logo .elementor-widget-image, .hb-client-logo figure, .hb-client-logo a { display: block; align-self: center; width: 100%; margin: 0; }
+/*
+ * Logos arrive as wordmarks and as square marks in wildly different aspect
+ * ratios. Capping both axes and letting the shorter one shrink keeps them
+ * optically the same size and centred on one baseline.
+ */
+.hb-client-logo img { display: block; width: auto; height: auto; max-width: 138px; max-height: 36px; margin: 0 auto; object-fit: contain; }
+/*
+ * A round emblem reads smaller than a wordmark of the same height, so the
+ * square-format logo gets a larger cap to carry the same optical weight.
+ */
+.hb-client-logos .hb-client-logo:nth-child(5) img { max-height: 50px; }
+.hb-metric-grid { width: 100%; }
+.hb-metric-grid > .e-con-inner { gap: 18px; align-items: stretch; }
+.hb-metric { min-height: 180px; padding: 30px; background: #fff; border: 1px solid var(--hb-line); border-top: 5px solid var(--hb-accent); }
+body .elementor .hb-metric-number .elementor-heading-title { color: var(--hb-ink); font-size: 48px; font-weight: 800; line-height: 1; letter-spacing: -.045em; }
+.hb-metric .elementor-widget-text-editor { color: var(--hb-muted); font-size: 16px; line-height: 1.5; }
+.hb-button-outline { margin-top: 26px; }
+body .elementor .hb-button-outline .elementor-button { background: transparent; border: 1px solid var(--hb-ink); }
+
+.hb-card-grid > .e-con-inner { gap: 22px; align-items: stretch; }
+.hb-card { min-height: 320px; padding: 36px; background: #fff; border: 1px solid var(--hb-line); transition: transform .2s, box-shadow .2s; }
+.hb-card, .hb-card > .e-con-inner { display: flex !important; flex-direction: column; align-items: stretch; width: 100%; max-width: 100%; }
+.hb-card > .e-con-inner { flex: 1; padding: 0; }
+.hb-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px #17202712; }
+body .elementor .hb-card .elementor-icon-box-wrapper { text-align: left; }
+.hb-card .elementor-icon-box-icon { margin-bottom: 44px !important; }
+.hb-card .elementor-icon { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: var(--hb-accent-soft); color: var(--hb-accent-ink); }
+/*
+ * The card marks are drawn from plain glyphs rather than an icon font, so the
+ * demo renders identically whether or not Elementor loads a Font Awesome kit.
+ */
+.hb-card .elementor-icon i { font-family: Arial, Helvetica, sans-serif !important; font-style: normal; font-size: 26px; line-height: 1; }
+.hb-card .elementor-icon i:before { content: "\2197"; }
+.hb-card-grid .hb-card:nth-child(2) .elementor-icon { background: var(--hb-green-soft); color: var(--hb-green); }
+.hb-card-grid .hb-card:nth-child(2) .elementor-icon i:before { content: "\25CE"; }
+.hb-card-grid .hb-card:nth-child(3) .elementor-icon { background: var(--hb-violet-soft); color: var(--hb-violet); }
+.hb-card-grid .hb-card:nth-child(3) .elementor-icon i:before { content: "\2301"; }
+body .elementor .hb-card .elementor-icon-box-title { margin: 0 0 14px; color: var(--hb-ink); font-size: 22px; font-weight: 700; letter-spacing: -.03em; }
+body .elementor .hb-card .elementor-icon-box-description { margin: 0; color: var(--hb-muted); font-size: 14px; line-height: 1.65; }
+.hb-card-link { margin-top: auto; padding-top: 26px; }
+body .elementor .hb-card-link .elementor-button { min-height: 0; padding: 0 0 5px; background: transparent; border: 0; border-bottom: 1px solid var(--hb-ink); border-radius: 0; color: var(--hb-ink); font-size: 12px; font-weight: 800; }
+body .elementor .hb-card-link .elementor-button:hover { transform: none; box-shadow: none; border-bottom-color: var(--hb-accent-ink); color: var(--hb-accent-ink); }
+.hb-roi { background: var(--hb-accent-soft); }
+.hb-roi-panel { padding: 12px; background: #fff; border: 1px solid #eadf9e; box-shadow: 0 24px 70px #473c1114; }
+.hb-roi-calculator { padding: 34px; }
+/*
+ * A wrapping field label must not push its own input out of line. The row of
+ * labels and the row of inputs are shared tracks, so every input starts on the
+ * same baseline no matter how many lines its label takes; the min-height keeps
+ * that true without subgrid as well.
+ */
+.hb-roi-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 9px 14px; }
+.hb-roi-fields label { display: grid; grid-row: span 2; grid-template-rows: subgrid; align-content: start; gap: 9px; color: var(--hb-muted); font-size: 12px; font-weight: 700; line-height: 1.3; }
+.hb-roi-fields label > :first-child { min-height: 2.6em; }
+.hb-roi-fields input { width: 100%; min-height: 54px; padding: 12px 14px; border: 1px solid #cfd4d1; border-radius: 0; background: #fff; color: var(--hb-ink); font: inherit; font-size: 18px; font-weight: 800; }
+.hb-roi-fields input:focus { border-color: var(--hb-accent-ink); outline: 3px solid var(--hb-accent-soft); }
+.hb-input-suffix { position: relative; display: block; }
+.hb-input-suffix b { position: absolute; top: 50%; right: 14px; transform: translateY(-50%); color: var(--hb-muted); }
+.hb-input-suffix input { padding-right: 48px; }
+.hb-roi-assumption { margin: 14px 0 24px; color: var(--hb-muted); font-size: 12px; }
+.hb-roi-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--hb-ink); }
+.hb-roi-results > div { min-height: 150px; padding: 24px; display: flex; flex-direction: column; justify-content: center; background: var(--hb-ink); color: #fff; }
+.hb-roi-results > div + div { background: var(--hb-accent); color: var(--hb-ink); }
+.hb-roi-results small { margin-bottom: 12px; font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.hb-roi-results strong { font-size: clamp(27px, 3vw, 42px); line-height: 1; letter-spacing: -.045em; white-space: nowrap; }
+.hb-roi-results span { margin-top: 10px; font-size: 12px; opacity: .72; }
+.hb-roi-cta { min-height: 56px; padding: 17px 20px; display: flex; justify-content: space-between; align-items: center; background: #fff; border: 1px solid var(--hb-ink); border-top: 0; color: var(--hb-ink); font-size: 14px; font-weight: 800; text-decoration: none; }
+.hb-roi-cta:hover { background: var(--hb-accent-soft); }
+.hb-how { padding: 110px max(24px, calc((100vw - var(--hb-content)) / 2)); background: var(--hb-ink); color: #fff; }
+.hb-how .hb-display-title .elementor-heading-title, .hb-how .elementor-icon-box-title { color: #fff !important; }.hb-how .hb-lead, .hb-how .elementor-icon-box-description { color: #aeb7ba !important; }
+.hb-how .hb-eyebrow .elementor-heading-title { color: var(--hb-accent); }
+/* Step numbers come from a CSS counter so the order survives editing in Elementor. */
+.hb-how-steps { counter-reset: hb-step; }
+.hb-step { padding: 26px 0; border-top: 1px solid #ffffff26; }.hb-step:last-child { border-bottom: 1px solid #ffffff26; }
+.hb-step .elementor-icon-box-icon { min-width: 46px; }
+.hb-step .elementor-icon { counter-increment: hb-step; color: var(--hb-accent); }
+.hb-step .elementor-icon i { font-family: Arial, Helvetica, sans-serif !important; font-style: normal; font-size: 13px; font-weight: 700; }
+.hb-step .elementor-icon i:before { content: "0" counter(hb-step); }
+body .elementor .hb-step .elementor-icon-box-title { margin: 0 0 10px; font-size: 21px; font-weight: 700; letter-spacing: -.02em; }
+body .elementor .hb-step .elementor-icon-box-description { margin: 0; font-size: 14px; line-height: 1.65; }
+
+.hb-quote { padding: 110px max(24px, calc((100vw - 900px) / 2)); background: var(--hb-cream); text-align: center; }
+.hb-quote .elementor-testimonial-wrapper:before { content: "\201C"; display: block; margin-bottom: 4px; color: var(--hb-accent); font-family: Georgia, serif; font-size: 70px; line-height: 1; }
+.hb-quote .elementor-testimonial-content { color: var(--hb-ink); font-family: Georgia, serif; font-size: clamp(30px, 3.7vw, 52px); font-style: normal; line-height: 1.28; letter-spacing: -.035em; }
+.hb-quote .elementor-testimonial-meta { margin-top: 36px; }
+body .elementor .hb-quote .elementor-testimonial-image { display: none; }
+body .elementor .hb-quote .elementor-testimonial-name { color: var(--hb-ink); font-size: 13px; font-weight: 700; }
+body .elementor .hb-quote .elementor-testimonial-job { color: var(--hb-muted); font-size: 11px; }
+.hb-video { background: #fff; }
+.hb-video-title, .hb-video-lead { max-width: 850px; }
+.hb-video-lead { margin-bottom: 28px; }
+.hb-video-embed { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #101418; }
+.hb-video-embed iframe { width: 100%; height: 100%; display: block; border: 0; }
+.hb-video-player { width: 100%; background: #101418; }
+.hb-video-player .elementor-wrapper { aspect-ratio: 16 / 9; }
+.hb-video-player iframe { width: 100%; height: 100%; display: block; }
+.hb-video-notes { border: 1px solid var(--hb-line); border-top: 0; }
+.hb-video-notes > .e-con-inner, .hb-video-notes.e-con-full { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 !important; align-items: stretch; }
+.hb-video-note { width: auto !important; min-height: 120px; padding: 24px; }
+.hb-video-note, .hb-video-note > .e-con-inner { display: grid !important; grid-template-columns: auto 1fr; align-content: start; gap: 15px; width: 100%; max-width: 100%; }
+.hb-video-note > .e-con-inner { padding: 0; }
+.hb-video-notes > .e-con-inner > div + div, .hb-video-notes.e-con-full > div + div { border-left: 1px solid var(--hb-line); }
+body .elementor .hb-video-note-number .elementor-heading-title { color: var(--hb-accent-ink); font-size: 12px; font-weight: 800; }
+.hb-video-note-text p { margin: 0; color: var(--hb-muted); font-size: 14px; line-height: 1.55; }
+
+/*
+ * FAQ. The accordion draws its own +/- marks from glyphs, so the section does
+ * not depend on an icon font either.
+ */
+.hb-faq { background: #fff; align-items: start; }
+.hb-faq-copy .hb-display-title { max-width: 340px; }
+.hb-faq-list .elementor-accordion { border: 0; }
+.hb-faq-list .elementor-accordion-item { border: 0; border-top: 1px solid var(--hb-line); }
+.hb-faq-list .elementor-accordion-item:last-child { border-bottom: 1px solid var(--hb-line); }
+.hb-faq-list .elementor-tab-title { margin: 0; padding: 0; background: none; border: 0; }
+body .elementor .hb-faq-list .elementor-accordion-title,
+body .elementor .hb-faq-list .elementor-active .elementor-accordion-title { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; color: var(--hb-ink); font-size: 17px; font-weight: 700; line-height: 1.35; text-decoration: none; cursor: pointer; }
+.hb-faq-list .elementor-accordion-title:after { content: "+"; flex: 0 0 auto; color: var(--hb-accent-ink); font-size: 22px; font-weight: 400; line-height: 1; }
+.hb-faq-list .elementor-tab-title.elementor-active .elementor-accordion-title:after { content: "\2212"; }
+.hb-faq-list .elementor-tab-content { padding: 0 40px 26px 0; border: 0; color: var(--hb-muted); font-size: 14px; line-height: 1.7; }
+.hb-faq-list .elementor-tab-content p { margin: 0; }
+
+.hb-contact { padding: 80px max(24px, calc((100vw - var(--hb-content)) / 2)); background: var(--hb-accent); }
+body .elementor .hb-contact .hb-display-title .elementor-heading-title, body .elementor .hb-contact .hb-eyebrow .elementor-heading-title { color: var(--hb-ink); }
+body .elementor .hb-contact .hb-button .elementor-button { min-width: 190px; background: #fff; color: var(--hb-ink); white-space: nowrap; }
+.hb-site-footer { padding: 50px max(24px, calc((100vw - var(--hb-content)) / 2)); display: flex; justify-content: space-between; align-items: center; gap: 30px; color: var(--hb-muted); font-size: 12px; }.hb-site-footer .hb-brand img { width: 150px; }
+
+@media (max-width: 900px) {
+  .hb-site-header { min-height: 70px; justify-content: space-between; }.hb-site-nav { display: none; position: absolute; top: 69px; left: 0; right: 0; padding: 24px; background: #fff; flex-direction: column; box-shadow: 0 15px 30px #0002; }.hb-site-nav.is-open { display: flex; }.hb-header-cta { display: none; }.hb-menu-button { display: block; }
+  .hb-hero { min-height: 0; flex-direction: column !important; }.hb-hero-copy, .hb-hero-visual { width: 100% !important; }.hb-hero-copy { padding: 70px 6vw 56px; }.hb-section, .hb-how, .hb-contact, .hb-faq { padding: 80px 6vw; }
+  .hb-client-logos > .e-con-inner, .hb-client-logos.e-con-full { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hb-metric-grid, .hb-card-grid, .hb-roi, .hb-how, .hb-contact, .hb-faq { flex-direction: column !important; }.hb-metric, .hb-card, .hb-roi-copy, .hb-roi-panel, .hb-how-copy, .hb-how-steps, .hb-faq-copy, .hb-faq-list { width: 100% !important; }
+  .hb-metric-grid > .e-con-inner, .hb-card-grid > .e-con-inner { flex-direction: column; }
+  .hb-faq-copy .hb-display-title { max-width: none; }
+  /* Stacked fields need no shared label row, so single-line labels stay tight. */
+  .hb-roi-fields { grid-template-columns: 1fr; }.hb-roi-fields label > :first-child { min-height: 0; }.hb-roi-calculator { padding: 26px; }
+  .hb-video-notes > .e-con-inner, .hb-video-notes.e-con-full { grid-template-columns: 1fr; }.hb-video-notes > .e-con-inner > div + div, .hb-video-notes.e-con-full > div + div { border-left: 0; border-top: 1px solid var(--hb-line); }
+  .hb-site-footer { padding: 40px 6vw; flex-wrap: wrap; }
+}
+@media (max-width: 520px) {
+  body .elementor .hb-hero-title .elementor-heading-title { font-size: 48px; }
+  .hb-client-logos > .e-con-inner, .hb-client-logos.e-con-full { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }.hb-client-logo { min-height: 88px; padding: 16px; }
+  .hb-roi-results { grid-template-columns: 1fr; }.hb-roi-results strong { white-space: normal; }.hb-site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }

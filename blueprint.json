@@ -1,0 +1,65 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "HandyBot Elementor demo",
+    "description": "Upravitelná HandyBot homepage ve WordPressu a Elementoru.",
+    "author": "jan-miksik",
+    "categories": ["demo", "elementor", "business"]
+  },
+  "landingPage": "/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "login": true,
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "elementor"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "hello-elementor"
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "git:directory",
+        "url": "https://github.com/jan-miksik/handybot-elementor-playground-demo",
+        "ref": "main",
+        "refType": "branch",
+        "path": "handybot-child"
+      },
+      "options": {
+        "activate": true,
+        "targetFolderName": "handybot-child"
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "git:directory",
+        "url": "https://github.com/jan-miksik/handybot-elementor-playground-demo",
+        "ref": "main",
+        "refType": "branch",
+        "path": "handybot-demo-setup"
+      },
+      "options": {
+        "activate": true,
+        "targetFolderName": "handybot-demo-setup"
+      }
+    }
+  ]
+}
