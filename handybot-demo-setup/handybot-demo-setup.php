@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HandyBot Demo Setup
  * Description: Creates the editable Elementor demo page and safe demo defaults.
- * Version: 0.5.4
+ * Version: 0.5.5
  * Author: Codex demo
  * Requires PHP: 8.0
  */
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const HANDBYBOT_DEMO_VERSION = '0.5.4';
+const HANDBYBOT_DEMO_VERSION = '0.5.5';
 
 /**
  * Generate a stable-looking Elementor element ID.
@@ -138,7 +138,7 @@ function handybot_demo_data( array $asset_ids = array() ): array {
 		}
 		$client_logo_widgets[] = handybot_demo_container(
 			'client-' . $client_logo[0],
-			handybot_demo_classes( 'hb-client-logo' ),
+			array_merge( handybot_demo_classes( 'hb-client-logo' ), array( 'flex_justify_content' => 'space-around' ) ),
 			array(
 				handybot_demo_widget(
 					'client-image-' . $client_logo[0],
@@ -286,7 +286,7 @@ function handybot_demo_data( array $asset_ids = array() ): array {
 				handybot_demo_widget( 'clients-text', 'text-editor', array_merge( handybot_demo_classes( 'hb-lead hb-clients-lead' ), array( 'editor' => '<p>Softwaroví roboti už pomáhají týmům ve financích, účetnictví i administrativě. Tady jsou výsledky z vybraných realizací.</p>' ) ) ),
 				handybot_demo_container( 'clients-logos', array_merge( handybot_demo_classes( 'hb-client-logos' ), array( 'flex_direction' => 'row', 'flex_wrap' => 'wrap', 'gap' => array( 'unit' => 'px', 'size' => 18 ) ) ), $client_logo_widgets ),
 				handybot_demo_container( 'metric-grid', array_merge( handybot_demo_classes( 'hb-metric-grid' ), array( 'flex_direction' => 'row', 'gap' => array( 'unit' => 'px', 'size' => 18 ) ) ), $metric_cards ),
-				handybot_demo_widget( 'clients-button', 'button', array_merge( handybot_demo_classes( 'hb-button hb-button-outline' ), array( 'text' => 'Prohlédnout více referencí →', 'link' => array( 'url' => 'https://handybot.cz/reference/', 'is_external' => 'on' ), 'align' => 'left' ) ) )
+				handybot_demo_widget( 'clients-button', 'button', array_merge( handybot_demo_classes( 'hb-button hb-button-outline' ), array( 'text' => 'Prohlédnout více referencí →', 'link' => array( 'url' => 'https://handybot.cz/reference/', 'is_external' => 'on' ), 'align' => 'center' ) ) )
 			)
 		),
 		handybot_demo_container(
@@ -304,7 +304,7 @@ function handybot_demo_data( array $asset_ids = array() ): array {
 			array(
 				handybot_demo_container( 'roi-copy', array_merge( handybot_demo_classes( 'hb-roi-copy' ), array( 'width' => array( 'unit' => '%', 'size' => 40 ), 'flex_direction' => 'column' ) ), array(
 					handybot_demo_widget( 'roi-kicker', 'heading', array_merge( handybot_demo_classes( 'hb-eyebrow' ), array( 'title' => '✦ ORIENTAČNÍ KALKULAČKA', 'header_size' => 'div' ) ) ),
-					handybot_demo_widget( 'roi-title', 'heading', array_merge( handybot_demo_classes( 'hb-display-title' ), array( 'title' => 'Kolik času stojí vaše rutina?', 'header_size' => 'h2' ) ) ),
+					handybot_demo_widget( 'roi-title', 'heading', array_merge( handybot_demo_classes( 'hb-display-title' ), array( 'title' => 'Kolik peněz stojí vaše rutina?', 'header_size' => 'h2' ) ) ),
 					handybot_demo_widget( 'roi-text', 'text-editor', array_merge( handybot_demo_classes( 'hb-lead' ), array( 'editor' => '<p>Upravte tři jednoduché údaje. Kalkulačka hned ukáže potenciál úspory, který potom ověříme na vašem konkrétním procesu.</p>' ) ) ),
 				) ),
 				handybot_demo_container( 'roi-panel', array_merge( handybot_demo_classes( 'hb-roi-panel' ), array( 'width' => array( 'unit' => '%', 'size' => 60 ) ) ), array(
@@ -330,7 +330,7 @@ function handybot_demo_data( array $asset_ids = array() ): array {
 			array(
 				handybot_demo_widget( 'video-kicker', 'heading', array_merge( handybot_demo_classes( 'hb-eyebrow' ), array( 'title' => '✦ ROZHOVOR O AUTOMATIZACI', 'header_size' => 'div' ) ) ),
 				handybot_demo_widget( 'video-title', 'heading', array_merge( handybot_demo_classes( 'hb-display-title hb-video-title' ), array( 'title' => 'Co může softwarový robot změnit ve firmě?', 'header_size' => 'h2' ) ) ),
-				handybot_demo_widget( 'video-text', 'text-editor', array_merge( handybot_demo_classes( 'hb-lead hb-video-lead' ), array( 'editor' => '<p>Rozhovor s Michalem Křížem jsme zvětšili na celou šířku obsahového sloupce. Pokud nemáte čas na celé video, začněte třemi tématy pod ním.</p>' ) ) ),
+				handybot_demo_widget( 'video-text', 'text-editor', array_merge( handybot_demo_classes( 'hb-lead hb-video-lead' ), array( 'editor' => '<p>Rozhovor s Michalem Křížem.</p>' ) ) ),
 				handybot_demo_widget( 'video-player', 'video', array_merge( handybot_demo_classes( 'hb-video-player' ), array( 'video_type' => 'youtube', 'youtube_url' => 'https://www.youtube.com/watch?v=PMNmRrzVq_w&t=1s', 'aspect_ratio' => '169', 'lazy_load' => 'yes' ) ) ),
 				handybot_demo_container( 'video-notes', array_merge( handybot_demo_classes( 'hb-video-notes' ), array( 'flex_direction' => 'row' ) ), $video_notes )
 			)
@@ -375,7 +375,7 @@ function handybot_demo_data( array $asset_ids = array() ): array {
 					handybot_demo_widget( 'contact-kicker', 'heading', array_merge( handybot_demo_classes( 'hb-eyebrow' ), array( 'title' => '✦ ZAČNĚME MALÝM KROKEM', 'header_size' => 'div' ) ) ),
 					handybot_demo_widget( 'contact-title', 'heading', array_merge( handybot_demo_classes( 'hb-display-title' ), array( 'title' => 'Co by mohl robot dělat právě za vás?', 'header_size' => 'h2' ) ) ),
 				) ),
-				handybot_demo_widget( 'contact-button', 'button', array_merge( handybot_demo_classes( 'hb-button' ), array( 'text' => 'Napište nám ↗', 'link' => array( 'url' => 'mailto:info@handybot.cz' ) ) ) )
+				handybot_demo_widget( 'contact-button', 'button', array_merge( handybot_demo_classes( 'hb-button' ), array( 'text' => 'Napište nám ↗', 'link' => array( 'url' => 'mailto:info@handybot.cz' ), '_flex_align_self' => 'center' ) ) )
 			)
 		),
 	);
