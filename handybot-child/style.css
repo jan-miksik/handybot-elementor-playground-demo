@@ -4,7 +4,7 @@ Theme URI: https://handybot.cz/
 Description: A code-managed design layer around editable Elementor content.
 Author: Codex demo
 Template: hello-elementor
-Version: 0.5.6
+Version: 0.6.2
 Text Domain: handybot-demo
 */
 
@@ -84,11 +84,13 @@ body .elementor .hb-hero-explainer { font-size: 20px; }
 /*
  * On desktop the artwork fills the whole column instead of floating in a band
  * of empty tint, so the robot carries as much weight as the headline. The crop
- * is off-centre to keep the robot and the interface it points at.
+ * favours the documents and the chart the robot is processing, because that is
+ * what the page is selling; the page-builder panel it points at is only a
+ * sliver, since web design is not what this section promises.
  */
 @media (min-width: 901px) {
   .hb-hero-image, .hb-hero-image .elementor-widget-container, .hb-hero-image figure, .hb-hero-image a { height: 100%; }
-  .hb-hero-image img { height: 100%; object-fit: cover; object-position: 62% 50%; }
+  .hb-hero-image img { height: 100%; object-fit: cover; object-position: 38% 50%; }
 }
 
 .hb-section { padding: 115px max(24px, calc((100vw - var(--hb-content)) / 2)); }
@@ -130,15 +132,16 @@ body .elementor .hb-card .elementor-icon-box-wrapper { text-align: left; }
 .hb-card .elementor-icon-box-icon { margin-bottom: 44px !important; }
 .hb-card .elementor-icon { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: var(--hb-accent-soft); color: var(--hb-accent-ink); }
 /*
- * The card marks are drawn from plain glyphs rather than an icon font, so the
- * demo renders identically whether or not Elementor loads a Font Awesome kit.
+ * The card marks are inline SVG masks rather than an icon font, so the demo
+ * renders identically whether or not Elementor loads a Font Awesome kit, and
+ * each mark names what is actually automated: documents, linked systems and a
+ * process that keeps running. currentColor keeps them themeable.
  */
-.hb-card .elementor-icon i { font-family: Arial, Helvetica, sans-serif !important; font-style: normal; font-size: 26px; line-height: 1; }
-.hb-card .elementor-icon i:before { content: "\2197"; }
-.hb-card-grid .hb-card:nth-child(2) .elementor-icon { background: var(--hb-green-soft); color: var(--hb-green); }
-.hb-card-grid .hb-card:nth-child(2) .elementor-icon i:before { content: "\25CE"; }
-.hb-card-grid .hb-card:nth-child(3) .elementor-icon { background: var(--hb-violet-soft); color: var(--hb-violet); }
-.hb-card-grid .hb-card:nth-child(3) .elementor-icon i:before { content: "\2301"; }
+.hb-card .elementor-icon i { width: 27px; height: 27px; display: block; background: var(--hb-mark-ink); -webkit-mask: center / contain no-repeat var(--hb-mark); mask: center / contain no-repeat var(--hb-mark); }
+.hb-card .elementor-icon i:before { content: none; }
+.hb-card .elementor-icon { --hb-mark-ink: var(--hb-accent-ink); --hb-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13.6 2.9H6.7a1.8 1.8 0 0 0-1.8 1.8v14.6a1.8 1.8 0 0 0 1.8 1.8h6'/%3E%3Cpath d='M13.6 2.9 19 8.3v2.4'/%3E%3Cpath d='M13.6 2.9v5.4H19'/%3E%3Cpath d='M8.3 11.6h4.4M8.3 15.1h2.8'/%3E%3Ccircle cx='17.2' cy='16.8' r='4.3'/%3E%3Cpath d='m15.4 16.8 1.3 1.3 2.3-2.5'/%3E%3C/svg%3E"); }
+.hb-card-grid .hb-card:nth-child(2) .elementor-icon { background: var(--hb-green-soft); color: var(--hb-green); --hb-mark-ink: var(--hb-green); --hb-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.9' y='2.9' width='6.2' height='6.2' rx='1.4'/%3E%3Crect x='14.9' y='2.9' width='6.2' height='6.2' rx='1.4'/%3E%3Crect x='2.9' y='14.9' width='6.2' height='6.2' rx='1.4'/%3E%3Crect x='14.9' y='14.9' width='6.2' height='6.2' rx='1.4'/%3E%3Cpath d='M9.1 6h5.8M6 9.1v5.8M18 9.1v5.8M9.1 18h5.8'/%3E%3C/svg%3E"); }
+.hb-card-grid .hb-card:nth-child(3) .elementor-icon { background: var(--hb-violet-soft); color: var(--hb-violet); --hb-mark-ink: var(--hb-violet); --hb-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.4 13.1a8.5 8.5 0 0 1-14.6 4.5'/%3E%3Cpath d='M3.6 10.9a8.5 8.5 0 0 1 14.6-4.5'/%3E%3Cpath d='M18.6 2.6v3.9h-3.9'/%3E%3Cpath d='M5.4 21.4v-3.9h3.9'/%3E%3C/svg%3E"); }
 body .elementor .hb-card .elementor-icon-box-title { margin: 0 0 14px; color: var(--hb-ink); font-size: 22px; font-weight: 700; letter-spacing: -.03em; }
 body .elementor .hb-card .elementor-icon-box-description { margin: 0; color: var(--hb-muted); font-size: 14px; line-height: 1.65; }
 .hb-card-link { margin-top: auto; padding-top: 26px; }
