@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HandyBot Demo Setup
  * Description: Creates the editable Elementor demo page and safe demo defaults.
- * Version: 0.5.2
+ * Version: 0.5.4
  * Author: Codex demo
  * Requires PHP: 8.0
  */
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const HANDBYBOT_DEMO_VERSION = '0.5.2';
+const HANDBYBOT_DEMO_VERSION = '0.5.4';
 
 /**
  * Generate a stable-looking Elementor element ID.
@@ -399,13 +399,30 @@ function handybot_demo_asset_attachment( string $relative_path, string $title, s
 			'meta_value'     => $relative_path,
 		)
 	);
-	if ( ! empty( $existing ) ) {
-		return (int) $existing[0];
-	}
-
 	$source = trailingslashit( get_stylesheet_directory() ) . 'assets/' . ltrim( $relative_path, '/' );
 	if ( ! is_readable( $source ) ) {
-		return 0;
+		return ! empty( $existing ) ? (int) $existing[0] : 0;
+	}
+
+	// An existing attachment is reused, but its file is refreshed whenever the
+	// bundled source changed. Without this, replacing an image in the theme
+	// assets folder would leave the site serving the previously imported copy.
+	if ( ! empty( $existing ) ) {
+		$existing_id   = (int) $existing[0];
+		$existing_file = get_attached_file( $existing_id );
+
+		if ( $existing_file && ( ! file_exists( $existing_file ) || hash_file( 'sha1', $source ) !== hash_file( 'sha1', $existing_file ) ) ) {
+			$contents = file_get_contents( $source );
+			if ( false !== $contents && false !== file_put_contents( $existing_file, $contents ) ) {
+				require_once ABSPATH . 'wp-admin/includes/image.php';
+				$metadata = wp_generate_attachment_metadata( $existing_id, $existing_file );
+				if ( ! is_wp_error( $metadata ) ) {
+					wp_update_attachment_metadata( $existing_id, $metadata );
+				}
+			}
+		}
+
+		return $existing_id;
 	}
 
 	$uploads = wp_upload_dir();
@@ -497,6 +514,8 @@ function handybot_demo_install(): void {
 	update_option( 'blogname', 'HandyBot Demo' );
 	update_option( 'blogdescription', 'Méně rutiny. Více práce, která má smysl.' );
 	update_option( 'elementor_css_print_method', 'internal' );
+	update_option( 'elementor_onboarded', true );
+	delete_transient( 'elementor_activation_redirect' );
 	update_option( 'handybot_demo_page_id', (int) $page_id );
 	update_option( 'handybot_demo_version', HANDBYBOT_DEMO_VERSION );
 
@@ -539,4 +558,3 @@ add_action(
 		<?php
 	}
 );
-
